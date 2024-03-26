@@ -1,0 +1,23 @@
+{
+  "title": "Futactix",
+  "menubarAbout": "About Futactix",
+  "menubarSettings": "Asetukset...",
+  "menubarQuit": "Lopeta",
+  "menubarFile": "Tiedosto",
+  "menubarNewProject": "Uusi projekti",
+  "menubarOpen": "Avaa",
+  "menubarSave": "Tallenna",
+  "menubarEdit": "Muokkaa",
+  "menubarUndo": "Kumoa",
+  "menubarClear": "Tyhjennä",
+  "menubarRemoveObjects": "Poista objektit",
+  "menubarFormations": "Muodostelmat",
+  "menubarFootball5": "Jalkapallo 5",
+  "menubarFootball8": "Jalkapallo 8",
+  "menubarFootball11": "Jalkapallo 11",
+  "menubarFootball5vs5": "Jalkapallo 5 vs 5",
+  "menubarFootball8vs8": "Jalkapallo 8 vs 8",
+  "menubarFootball11vs11": "Jalkapallo 11 vs 11",
+  "menubarFutsal5": "Futsal 5",
+  "menubarFutsal5vs5": "Futsal 5 vs 5"
+}

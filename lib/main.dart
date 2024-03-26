@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/l10n.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,12 +13,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Futactix',
+      onGenerateTitle: (context) => L10n.of(context).title,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0x0000308C)),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      locale: Locale('en'),
+      localizationsDelegates: L10n.localizationsDelegates,
+      supportedLocales: L10n.supportedLocales,
     );
   }
 }
@@ -56,6 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = L10n.of(context);
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -66,12 +71,12 @@ class _MyHomePageState extends State<MyHomePage> {
       body: PlatformMenuBar(
         menus: [
           PlatformMenu(
-            label: 'Futactix',
+            label: l10n.title,
             menus: [
               PlatformMenuItemGroup(
                 members: [
                   PlatformMenuItem(
-                    label: 'About Futactix',
+                    label: l10n.menubarAbout,
                     onSelected: () {
                       print('Clicked About Futactix');
                     },
@@ -81,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
               PlatformMenuItemGroup(
                 members: [
                   PlatformMenuItem(
-                    label: 'Settings',
+                    label: l10n.menubarSettings,
                     onSelected: () {
                       print('Clicked Settings');
                     },
@@ -92,17 +97,26 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ],
               ),
-              if (PlatformProvidedMenuItem.hasMenu(PlatformProvidedMenuItemType.quit))
-                const PlatformProvidedMenuItem(type: PlatformProvidedMenuItemType.quit),
+              PlatformMenuItem(
+                label: l10n.menubarQuit,
+                onSelected: () {
+                  print('Clicked Quit');
+                  SystemNavigator.pop();
+                },
+                shortcut: const SingleActivator(
+                  LogicalKeyboardKey.keyQ,
+                  meta: true,
+                ),
+              ),
             ],
           ),
           PlatformMenu(
-            label: 'File',
+            label: l10n.menubarFile,
             menus: [
               PlatformMenuItemGroup(
                 members: [
                   PlatformMenuItem(
-                    label: 'New Project',
+                    label: l10n.menubarNewProject,
                     onSelected: () {
                       print('Clicked File > New Project');
                     },
@@ -112,7 +126,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   PlatformMenuItem(
-                    label: 'Open',
+                    label: l10n.menubarOpen,
                     onSelected: () {
                       print('Clicked File > Open');
                     },
@@ -122,7 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   PlatformMenuItem(
-                    label: 'Save',
+                    label: l10n.menubarSave,
                     onSelected: () {
                       print('Clicked File > Save');
                     },
@@ -136,12 +150,12 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
           PlatformMenu(
-            label: 'Edit',
+            label: l10n.menubarEdit,
             menus: [
               PlatformMenuItemGroup(
                 members: [
                   PlatformMenuItem(
-                    label: 'Undo',
+                    label: l10n.menubarUndo,
                     onSelected: () {
                       print('Clicked Edit > Undo');
                     },
@@ -151,13 +165,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   PlatformMenuItem(
-                    label: 'Clear',
+                    label: l10n.menubarClear,
                     onSelected: () {
                       print('Clicked Edit > Clear Drawings');
                     },
                   ),
                   PlatformMenuItem(
-                    label: 'Remove Objects',
+                    label: l10n.menubarRemoveObjects,
                     onSelected: () {
                       print('Clicked Edit > Remove Objects');
                     },
@@ -167,24 +181,24 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
           PlatformMenu(
-            label: 'Formations',
+            label: l10n.menubarFormations,
             menus: [
               PlatformMenuItemGroup(
                 members: [
                   PlatformMenuItem(
-                    label: 'Football 5',
+                    label: l10n.menubarFootball5,
                     onSelected: () {
                       print('Clicked Formations > Football 5');
                     },
                   ),
                   PlatformMenuItem(
-                    label: 'Football 8',
+                    label: l10n.menubarFootball8,
                     onSelected: () {
                       print('Clicked Formations > Football 8');
                     },
                   ),
                   PlatformMenuItem(
-                    label: 'Football 11',
+                    label: l10n.menubarFootball11,
                     onSelected: () {
                       print('Clicked Formations > Football 11');
                     },
@@ -194,19 +208,19 @@ class _MyHomePageState extends State<MyHomePage> {
               PlatformMenuItemGroup(
                 members: [
                   PlatformMenuItem(
-                    label: 'Football 5 vs 5',
+                    label: l10n.menubarFootball5vs5,
                     onSelected: () {
                       print('Clicked Formations > Football 5 vs 5');
                     },
                   ),
                   PlatformMenuItem(
-                    label: 'Football 8 vs 8',
+                    label: l10n.menubarFootball8vs8,
                     onSelected: () {
                       print('Clicked Formations > Football 8 vs 8');
                     },
                   ),
                   PlatformMenuItem(
-                    label: 'Football 11 vs 11',
+                    label: l10n.menubarFootball11vs11,
                     onSelected: () {
                       print('Clicked Formations > Football 11 vs 11');
                     },
@@ -216,13 +230,13 @@ class _MyHomePageState extends State<MyHomePage> {
               PlatformMenuItemGroup(
                 members: [
                   PlatformMenuItem(
-                    label: 'Futsal 5',
+                    label: l10n.menubarFutsal5,
                     onSelected: () {
                       print('Clicked Formations > Futsal 5');
                     },
                   ),
                   PlatformMenuItem(
-                    label: 'Futsal 5 vs 5',
+                    label: l10n.menubarFutsal5vs5,
                     onSelected: () {
                       print('Clicked Formations > Futsal 5 vs 5');
                     },
@@ -233,22 +247,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
         child: Center(
-          // Center is a layout widget. It takes a single child and positions it
-          // in the middle of the parent.
           child: Column(
-            // Column is also a layout widget. It takes a list of children and
-            // arranges them vertically. By default, it sizes itself to fit its
-            // children horizontally, and tries to be as tall as its parent.
-            //
-            // Column has various properties to control how it sizes itself and
-            // how it positions its children. Here we use mainAxisAlignment to
-            // center the children vertically; the main axis here is the vertical
-            // axis because Columns are vertical (the cross axis would be
-            // horizontal).
-            //
-            // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-            // action in the IDE, or press "p" in the console), to see the
-            // wireframe for each widget.
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const Text(
