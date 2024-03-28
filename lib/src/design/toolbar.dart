@@ -7,13 +7,16 @@ class Toolbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ColoredBox(
+    return Material(
+      shadowColor: Colors.black,
+      elevation: 5,
       color: Colors.white,
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: children.intersperse(const _Separator()).toList(),
         ),
       ),
@@ -30,7 +33,7 @@ class _Separator extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 8),
       color: Colors.grey,
       width: 1,
-      height: 40,
+      height: 60,
     );
   }
 }
@@ -47,20 +50,23 @@ class ToolbarGroup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(
-          title.toLocalizedUpperCase(Localizations.localeOf(context)),
-          style: TextStyle(
-            color: Colors.grey,
-            fontSize: 10,
+    return SizedBox(
+      height: 60,
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            title.toLocalizedUpperCase(Localizations.localeOf(context)),
+            style: const TextStyle(
+              color: Colors.grey,
+              fontSize: 10,
+            ),
           ),
-        ),
-        if (child != null) child!,
-      ],
+          if (child != null) Expanded(child: child!),
+        ],
+      ),
     );
   }
 }

@@ -10,4 +10,7 @@ class Colors {
   static const red = Color(0xFFD22F37);
   static const yellow = Color(0xFFF9D84B);
   static const grey = Color(0xFF454545);
+  static const orange = Color(0xFFF19E38);
+  static const brightRed = Color(0xFFEA383F);
+  static const brown = Color(0xFF937962);
 }

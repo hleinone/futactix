@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 import 'package:futactix/src/design.dart';
 import 'package:futactix/src/layout/main_page_platform_menu_bar.dart';
+import 'package:futactix/src/util.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key, required this.title});
@@ -22,19 +22,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  int _counter = 0;
   late final l10n = L10n.of(context);
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,36 +40,186 @@ class _MainPageState extends State<MainPage> {
               children: [
                 ToolbarGroup(
                   title: l10n.toolbarAttackingPlayer,
-                  child: const Icon(Icons.sports_soccer),
+                  child: Row(
+                    children: <Widget>[
+                      const Icon(
+                        Icons.attackingPlayer,
+                        color: Colors.blue,
+                      ),
+                      const Icon(
+                        Icons.attackingPlayer,
+                        color: Colors.red,
+                      ),
+                      const Icon(
+                        Icons.attackingPlayer,
+                        color: Colors.yellow,
+                      ),
+                      const Icon(
+                        Icons.attackingPlayer,
+                        color: Colors.grey,
+                      ),
+                    ].intersperse(const SizedBox(width: 8)).toList(),
+                  ),
                 ),
                 ToolbarGroup(
                   title: l10n.toolbarDefendingPlayer,
-                  child: const Icon(Icons.sports_soccer),
+                  child: Row(
+                    children: <Widget>[
+                      const Icon(
+                        Icons.defendingPlayer,
+                        color: Colors.blue,
+                      ),
+                      const Icon(
+                        Icons.defendingPlayer,
+                        color: Colors.red,
+                      ),
+                      const Icon(
+                        Icons.defendingPlayer,
+                        color: Colors.yellow,
+                      ),
+                      const Icon(
+                        Icons.defendingPlayer,
+                        color: Colors.grey,
+                      ),
+                    ].intersperse(const SizedBox(width: 8)).toList(),
+                  ),
+                ),
+                ToolbarGroup(
+                  title: l10n.toolbarDummy,
+                  child: const Icon(Icons.dummy),
+                ),
+                ToolbarGroup(
+                  title: l10n.toolbarHoop,
+                  child: const Icon(
+                    Icons.hoop,
+                    color: Colors.yellow,
+                  ),
+                ),
+                ToolbarGroup(
+                  title: l10n.toolbarPileOfBalls,
+                  child: const Icon(
+                    Icons.attackingPlayer,
+                    color: Colors.blue,
+                  ),
+                ),
+                ToolbarGroup(
+                  title: l10n.toolbarBall,
+                  child: const Icon(
+                    Icons.attackingPlayer,
+                    color: Colors.blue,
+                  ),
+                ),
+                ToolbarGroup(
+                  title: l10n.toolbarPoleOnGround,
+                  child: const Icon(
+                    Icons.poleOnGround,
+                    color: Colors.brown,
+                  ),
+                ),
+                ToolbarGroup(
+                  title: l10n.toolbarPoleStanding,
+                  child: Row(
+                    children: <Widget>[
+                      const Stack(
+                        children: [
+                          Icon(
+                            Icons.poleStandingBackground,
+                            color: Colors.brightRed,
+                          ),
+                          Icon(Icons.poleStandingForeground),
+                        ],
+                      ),
+                      const Stack(
+                        children: [
+                          Icon(
+                            Icons.poleStandingBackground,
+                            color: Colors.orange,
+                          ),
+                          Icon(Icons.poleStandingForeground),
+                        ],
+                      ),
+                    ].intersperse(const SizedBox(width: 16)).toList(),
+                  ),
+                ),
+                ToolbarGroup(
+                  title: l10n.toolbarMarker,
+                  child: Row(
+                    children: <Widget>[
+                      const Icon(
+                        Icons.marker,
+                        color: Colors.yellow,
+                      ),
+                      const Icon(
+                        Icons.marker,
+                        color: Colors.brightRed,
+                      ),
+                      const Icon(
+                        Icons.marker,
+                        color: Colors.blue,
+                      ),
+                    ].intersperse(const SizedBox(width: 4)).toList(),
+                  ),
+                ),
+                ToolbarGroup(
+                  title: l10n.toolbarCone,
+                  child: const Icon(
+                    Icons.attackingPlayer,
+                    color: Colors.blue,
+                  ),
+                ),
+                ToolbarGroup(
+                  title: l10n.toolbarFence,
+                  child: const Icon(
+                    Icons.attackingPlayer,
+                    color: Colors.blue,
+                  ),
+                ),
+                ToolbarGroup(
+                  title: l10n.toolbarBench,
+                  child: const Icon(
+                    Icons.attackingPlayer,
+                    color: Colors.blue,
+                  ),
+                ),
+                ToolbarGroup(
+                  title: l10n.toolbarLadder,
+                  child: const Icon(
+                    Icons.attackingPlayer,
+                    color: Colors.blue,
+                  ),
+                ),
+                ToolbarGroup(
+                  title: l10n.toolbarSmallGoal,
+                  child: const Icon(
+                    Icons.attackingPlayer,
+                    color: Colors.blue,
+                  ),
+                ),
+                ToolbarGroup(
+                  title: l10n.toolbarBigGoal,
+                  child: const Icon(
+                    Icons.attackingPlayer,
+                    color: Colors.blue,
+                  ),
+                ),
+                ToolbarGroup(
+                  title: l10n.toolbarFutsalGoal,
+                  child: const Icon(
+                    Icons.attackingPlayer,
+                    color: Colors.blue,
+                  ),
                 ),
               ],
             ),
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  const Text(
-                    'You have pushed the button this many times:',
-                  ),
-                  Text(
-                    '$_counter',
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
-                ],
+            const Expanded(
+              child: Material(
+                elevation: 0,
+                color: Colors.white,
               ),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
