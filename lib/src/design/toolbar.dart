@@ -1,41 +1,48 @@
 part of '../design.dart';
 
 class Toolbar extends StatelessWidget {
-  const Toolbar({super.key});
+  final List<Widget> children;
+
+  const Toolbar({super.key, required this.children});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        ToolbarGroup(title: 'title', children: children)
-        IconButton(
-          icon: const Icon(Icons.menu),
-          onPressed: () {},
+    return ColoredBox(
+      color: Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: children.intersperse(const _Separator()).toList(),
         ),
-        const Spacer(),
-        IconButton(
-          icon: const Icon(Icons.search),
-          onPressed: () {},
-        ),
-        IconButton(
-          icon: const Icon(Icons.more_vert),
-          onPressed: () {},
-        ),
-      ],
+      ),
+    );
+  }
+}
+
+class _Separator extends StatelessWidget {
+  const _Separator();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 8),
+      color: Colors.grey,
+      width: 1,
+      height: 40,
     );
   }
 }
 
 class ToolbarGroup extends StatelessWidget {
   final String title;
-  final List<Widget> children;
+  final Widget? child;
 
   const ToolbarGroup({
     super.key,
     required this.title,
-    required this.children,
+    this.child,
   });
 
   @override
@@ -45,12 +52,14 @@ class ToolbarGroup extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(title),
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: children,
+        Text(
+          title.toLocalizedUpperCase(Localizations.localeOf(context)),
+          style: TextStyle(
+            color: Colors.grey,
+            fontSize: 10,
+          ),
         ),
+        if (child != null) child!,
       ],
     );
   }
