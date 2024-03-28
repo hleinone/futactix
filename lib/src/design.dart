@@ -1,6 +1,6 @@
 library design;
 
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart' hide Colors;
 
 part 'design/toolbar.dart';
+part 'design/colors.dart';
