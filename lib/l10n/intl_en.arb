@@ -19,5 +19,21 @@
   "menubarFootball8vs8": "Football 8 vs 8",
   "menubarFootball11vs11": "Football 11 vs 11",
   "menubarFutsal5": "Futsal 5",
-  "menubarFutsal5vs5": "Futsal 5 vs 5"
+  "menubarFutsal5vs5": "Futsal 5 vs 5",
+  "toolbarAttackingPlayer": "Attacking Player",
+  "toolbarDefendingPlayer": "Defending Player",
+  "toolbarDummy": "Dummy",
+  "toolbarHoop": "Hoop",
+  "toolbarPileOfBalls": "Pile of Balls",
+  "toolbarBall": "Ball",
+  "toolbarPoleOnGround": "Pole on Ground",
+  "toolbarPoleStanding": "Pole Standing",
+  "toolbarMarker": "Marker",
+  "toolbarCone": "Cone",
+  "toolbarFence": "Fence",
+  "toolbarBench": "Bench",
+  "toolbarLadder": "Ladder",
+  "toolbarSmallGoal": "Small Goal",
+  "toolbarBigGoal": "Big Goal",
+  "toolbarFutsalGoal": "Futsal Goal"
 }

@@ -19,5 +19,21 @@
   "menubarFootball8vs8": "Jalkapallo 8 vs 8",
   "menubarFootball11vs11": "Jalkapallo 11 vs 11",
   "menubarFutsal5": "Futsal 5",
-  "menubarFutsal5vs5": "Futsal 5 vs 5"
+  "menubarFutsal5vs5": "Futsal 5 vs 5",
+  "toolbarAttackingPlayer": "Hyökkäävä pelaaja",
+  "toolbarDefendingPlayer": "Puolustava pelaaja",
+  "toolbarDummy": "Dummy",
+  "toolbarHoop": "Vanne",
+  "toolbarPileOfBalls": "Pallokasa",
+  "toolbarBall": "Pallo",
+  "toolbarPoleOnGround": "Keppi maassa",
+  "toolbarPoleStanding": "Keppi pystyssä",
+  "toolbarMarker": "Tötsä",
+  "toolbarCone": "Kartio",
+  "toolbarFence": "Aita",
+  "toolbarBench": "Penkki",
+  "toolbarLadder": "Tikapuut",
+  "toolbarSmallGoal": "Pieni maali",
+  "toolbarBigGoal": "Iso maali",
+  "toolbarFutsalGoal": "Futsal-maali"
 }
