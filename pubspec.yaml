@@ -74,6 +74,17 @@ flutter:
     - assets/vector/pole_standing_background.svg
     - assets/vector/pole_standing_foreground.svg
     - assets/vector/marker.svg
+    - assets/vector/cone_background.svg
+    - assets/vector/cone_foreground.svg
+    - assets/vector/fence.svg
+    - assets/vector/bench.svg
+    - assets/vector/ladder.svg
+    - assets/vector/small_goal.svg
+    - assets/vector/large_goal.svg
+    - assets/vector/futsal_goal.svg
+    - assets/vector/football_11.svg
+    - assets/vector/football_11_vs_11.svg
+    - assets/vector/futsal_5_vs_5.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

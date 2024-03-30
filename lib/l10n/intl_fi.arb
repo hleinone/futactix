@@ -34,6 +34,6 @@
   "toolbarBench": "Penkki",
   "toolbarLadder": "Tikapuut",
   "toolbarSmallGoal": "Pieni maali",
-  "toolbarBigGoal": "Iso maali",
+  "toolbarLargeGoal": "Iso maali",
   "toolbarFutsalGoal": "Futsal-maali"
 }

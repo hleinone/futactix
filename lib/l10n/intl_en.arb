@@ -34,6 +34,6 @@
   "toolbarBench": "Bench",
   "toolbarLadder": "Ladder",
   "toolbarSmallGoal": "Small Goal",
-  "toolbarBigGoal": "Big Goal",
+  "toolbarLargeGoal": "Large Goal",
   "toolbarFutsalGoal": "Futsal Goal"
 }
