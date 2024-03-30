@@ -4,8 +4,9 @@ import 'package:flutter_gen/gen_l10n/l10n.dart';
 
 class MainPagePlatformMenuBar extends StatelessWidget {
   final Widget? child;
+  final void Function(MenuItem) onSelected;
 
-  const MainPagePlatformMenuBar({super.key, this.child});
+  const MainPagePlatformMenuBar({super.key, this.child, required this.onSelected});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class MainPagePlatformMenuBar extends StatelessWidget {
                 PlatformMenuItem(
                   label: l10n.menubarAbout,
                   onSelected: () {
-                    print('Clicked About Futactix');
+                    onSelected(MenuItem.about);
                   },
                 ),
               ],
@@ -30,7 +31,7 @@ class MainPagePlatformMenuBar extends StatelessWidget {
                 PlatformMenuItem(
                   label: l10n.menubarSettings,
                   onSelected: () {
-                    print('Clicked Settings');
+                    onSelected(MenuItem.settings);
                   },
                   shortcut: const SingleActivator(
                     LogicalKeyboardKey.comma,
@@ -42,8 +43,7 @@ class MainPagePlatformMenuBar extends StatelessWidget {
             PlatformMenuItem(
               label: l10n.menubarQuit,
               onSelected: () {
-                print('Clicked Quit');
-                SystemNavigator.pop();
+                onSelected(MenuItem.quit);
               },
               shortcut: const SingleActivator(
                 LogicalKeyboardKey.keyQ,
@@ -60,7 +60,7 @@ class MainPagePlatformMenuBar extends StatelessWidget {
                 PlatformMenuItem(
                   label: l10n.menubarNewProject,
                   onSelected: () {
-                    print('Clicked File > New Project');
+                    onSelected(MenuItem.newProject);
                   },
                   shortcut: const SingleActivator(
                     LogicalKeyboardKey.keyN,
@@ -70,7 +70,7 @@ class MainPagePlatformMenuBar extends StatelessWidget {
                 PlatformMenuItem(
                   label: l10n.menubarOpen,
                   onSelected: () {
-                    print('Clicked File > Open');
+                    onSelected(MenuItem.open);
                   },
                   shortcut: const SingleActivator(
                     LogicalKeyboardKey.keyO,
@@ -80,7 +80,7 @@ class MainPagePlatformMenuBar extends StatelessWidget {
                 PlatformMenuItem(
                   label: l10n.menubarSave,
                   onSelected: () {
-                    print('Clicked File > Save');
+                    onSelected(MenuItem.save);
                   },
                   shortcut: const SingleActivator(
                     LogicalKeyboardKey.keyS,
@@ -99,7 +99,7 @@ class MainPagePlatformMenuBar extends StatelessWidget {
                 PlatformMenuItem(
                   label: l10n.menubarUndo,
                   onSelected: () {
-                    print('Clicked Edit > Undo');
+                    onSelected(MenuItem.undo);
                   },
                   shortcut: const SingleActivator(
                     LogicalKeyboardKey.keyZ,
@@ -109,13 +109,13 @@ class MainPagePlatformMenuBar extends StatelessWidget {
                 PlatformMenuItem(
                   label: l10n.menubarClear,
                   onSelected: () {
-                    print('Clicked Edit > Clear Drawings');
+                    onSelected(MenuItem.clear);
                   },
                 ),
                 PlatformMenuItem(
                   label: l10n.menubarRemoveObjects,
                   onSelected: () {
-                    print('Clicked Edit > Remove Objects');
+                    onSelected(MenuItem.removeObjects);
                   },
                 ),
               ],
@@ -130,19 +130,19 @@ class MainPagePlatformMenuBar extends StatelessWidget {
                 PlatformMenuItem(
                   label: l10n.menubarFootball5,
                   onSelected: () {
-                    print('Clicked Formations > Football 5');
+                    onSelected(MenuItem.football5);
                   },
                 ),
                 PlatformMenuItem(
                   label: l10n.menubarFootball8,
                   onSelected: () {
-                    print('Clicked Formations > Football 8');
+                    onSelected(MenuItem.football8);
                   },
                 ),
                 PlatformMenuItem(
                   label: l10n.menubarFootball11,
                   onSelected: () {
-                    print('Clicked Formations > Football 11');
+                    onSelected(MenuItem.football11);
                   },
                 ),
               ],
@@ -152,19 +152,19 @@ class MainPagePlatformMenuBar extends StatelessWidget {
                 PlatformMenuItem(
                   label: l10n.menubarFootball5vs5,
                   onSelected: () {
-                    print('Clicked Formations > Football 5 vs 5');
+                    onSelected(MenuItem.football5vs5);
                   },
                 ),
                 PlatformMenuItem(
                   label: l10n.menubarFootball8vs8,
                   onSelected: () {
-                    print('Clicked Formations > Football 8 vs 8');
+                    onSelected(MenuItem.football8vs8);
                   },
                 ),
                 PlatformMenuItem(
                   label: l10n.menubarFootball11vs11,
                   onSelected: () {
-                    print('Clicked Formations > Football 11 vs 11');
+                    onSelected(MenuItem.football11vs11);
                   },
                 ),
               ],
@@ -174,13 +174,13 @@ class MainPagePlatformMenuBar extends StatelessWidget {
                 PlatformMenuItem(
                   label: l10n.menubarFutsal5,
                   onSelected: () {
-                    print('Clicked Formations > Futsal 5');
+                    onSelected(MenuItem.futsal5);
                   },
                 ),
                 PlatformMenuItem(
                   label: l10n.menubarFutsal5vs5,
                   onSelected: () {
-                    print('Clicked Formations > Futsal 5 vs 5');
+                    onSelected(MenuItem.futsal5vs5);
                   },
                 ),
               ],
@@ -191,4 +191,24 @@ class MainPagePlatformMenuBar extends StatelessWidget {
       child: child,
     );
   }
+}
+
+enum MenuItem {
+  about,
+  settings,
+  quit,
+  newProject,
+  open,
+  save,
+  undo,
+  clear,
+  removeObjects,
+  football5,
+  football8,
+  football11,
+  football5vs5,
+  football8vs8,
+  football11vs11,
+  futsal5,
+  futsal5vs5,
 }
