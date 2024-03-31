@@ -312,21 +312,34 @@ class _MainPageState extends State<MainPage> {
                       final localDetails =
                           DragTargetDetails(data: details.data, offset: details.offset - dragTargetOffset);
                       setState(() {
+                        final key = ValueKey(details);
                         objects = objects +
                             [
                               FutureBuilder(
+                                key: key,
                                 future: localDetails.data.image,
                                 builder: (context, snapshot) {
                                   final data = snapshot.data;
                                   if (data == null) {
                                     return const SizedBox.shrink();
                                   }
+                                  final child = Transform.rotate(
+                                    angle: localDetails.data.angle,
+                                    child: Image.memory(data),
+                                  );
                                   return Positioned(
                                     left: localDetails.offset.dx,
                                     top: localDetails.offset.dy,
-                                    child: Transform.rotate(
-                                      angle: localDetails.data.angle,
-                                      child: Image.memory(data),
+                                    child: Draggable(
+                                      onDragCompleted: () {
+                                        setState(() {
+                                          objects.removeWhere((element) => element.key == key);
+                                        });
+                                      },
+                                      feedback: child,
+                                      childWhenDragging: const SizedBox.shrink(),
+                                      data: details.data,
+                                      child: child,
                                     ),
                                   );
                                 },
