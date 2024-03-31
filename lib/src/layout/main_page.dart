@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 import 'package:futactix/src/design.dart';
@@ -20,6 +21,8 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   late final l10n = L10n.of(context);
   Pitch pitch = Pitch.football11vs11;
+  List<Widget> objects = [];
+  final dragTargetKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -298,12 +301,53 @@ class _MainPageState extends State<MainPage> {
               ),
               Expanded(
                 child: Center(
-                  child: ColoredBox(
-                    color: pitch.color,
-                    child: Padding(
-                      padding: const EdgeInsets.all(24),
-                      child: Icon(pitch.image),
-                    ),
+                  child: DragTarget<ToolbarObject>(
+                    key: dragTargetKey,
+                    onWillAcceptWithDetails: (details) {
+                      return true;
+                    },
+                    onAcceptWithDetails: (details) {
+                      final dragTargetOffset =
+                          (dragTargetKey.currentContext!.findRenderObject() as RenderBox).localToGlobal(Offset.zero);
+                      final localDetails =
+                          DragTargetDetails(data: details.data, offset: details.offset - dragTargetOffset);
+                      setState(() {
+                        objects = objects +
+                            [
+                              FutureBuilder(
+                                future: localDetails.data.image,
+                                builder: (context, snapshot) {
+                                  final data = snapshot.data;
+                                  if (data == null) {
+                                    return const SizedBox.shrink();
+                                  }
+                                  return Positioned(
+                                    left: localDetails.offset.dx,
+                                    top: localDetails.offset.dy,
+                                    child: Transform.rotate(
+                                      angle: localDetails.data.angle,
+                                      child: Image.memory(data),
+                                    ),
+                                  );
+                                },
+                              )
+                            ];
+                      });
+                    },
+                    builder: (context, candidateData, rejectedData) {
+                      return ColoredBox(
+                        color: pitch.color,
+                        child: Stack(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(24),
+                              child: Icon(pitch.image),
+                            ),
+                            ...objects,
+                          ],
+                        ),
+                      );
+                    },
                   ),
                 ),
               ),
@@ -322,16 +366,23 @@ class _MainPageState extends State<MainPage> {
       case MenuItem.football11:
         setState(() {
           pitch = Pitch.football11;
+          objects = [];
         });
         break;
       case MenuItem.football11vs11:
         setState(() {
           pitch = Pitch.football11vs11;
+          objects = [];
         });
         break;
       case MenuItem.futsal5vs5:
         setState(() {
           pitch = Pitch.futsal5vs5;
+          objects = [];
+        });
+      case MenuItem.removeObjects:
+        setState(() {
+          objects = [];
         });
       default:
         // TODO: Implement other menu items

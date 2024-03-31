@@ -62,16 +62,20 @@ class ToolbarGroup extends StatelessWidget {
 }
 
 class ToolbarItem extends StatelessWidget {
-  final Widget child;
   final Direction? direction;
+  final Widget child;
 
-  const ToolbarItem({super.key, required this.child, this.direction});
+  const ToolbarItem({
+    super.key,
+    this.direction,
+    required this.child,
+  });
 
   @override
   Widget build(BuildContext context) {
     final angle = direction?.let((direction) {
       final axis = MainPage.of(context).pitch.axis;
-      return direction.angle - (axis == Axis.horizontal ? math.pi / 2 : 0);
+      return direction.angle - axis.angle;
     });
     final child = Container(
       color: Colors.transparent,
@@ -81,13 +85,27 @@ class ToolbarItem extends StatelessWidget {
         child: this.child,
       ),
     );
+    final key = GlobalKey();
+    final data = ToolbarObject(imageKey: key, imageResolver: captureWidget, angle: angle ?? 0);
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: Draggable(
+        maxSimultaneousDrags: 1,
+        data: data,
         feedback: angle != null ? Transform.rotate(angle: angle, child: child) : child,
-        child: child,
+        child: RepaintBoundary(
+          key: key,
+          child: child,
+        ),
       ),
     );
+  }
+
+  Future<Uint8List> captureWidget(GlobalKey key) async {
+    final boundary = key.currentContext!.findRenderObject() as RenderRepaintBoundary;
+    final image = await boundary.toImage();
+    final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+    return byteData!.buffer.asUint8List();
   }
 }
 
@@ -98,4 +116,17 @@ enum Direction {
   final double angle;
 
   const Direction({required this.angle});
+}
+
+extension on Axis {
+  double get angle => this == Axis.horizontal ? math.pi / 2 : 0;
+}
+
+class ToolbarObject {
+  final GlobalKey imageKey;
+  final Future<Uint8List> Function(GlobalKey) imageResolver;
+  final double angle;
+  Future<Uint8List> get image => imageResolver(imageKey);
+
+  const ToolbarObject({required this.imageKey, required this.imageResolver, required this.angle});
 }
