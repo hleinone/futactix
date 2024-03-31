@@ -29,8 +29,8 @@ class IconData {
 class Icons {
   const Icons._();
 
-  static const IconData attackingPlayer = IconData._('assets/vector/attacking_player.svg');
-  static const IconData defendingPlayer = IconData._('assets/vector/defending_player.svg');
+  static const IconData offensivePlayer = IconData._('assets/vector/offensive_player.svg');
+  static const IconData defensivePlayer = IconData._('assets/vector/defensive_player.svg');
   static const IconData dummy = IconData._('assets/vector/dummy.svg');
   static const IconData hoop = IconData._('assets/vector/hoop.svg');
   static const IconData poleOnGround = IconData._('assets/vector/pole_on_ground.svg');

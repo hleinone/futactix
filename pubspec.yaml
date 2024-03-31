@@ -66,8 +66,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/vector/attacking_player.svg
-    - assets/vector/defending_player.svg
+    - assets/vector/offensive_player.svg
+    - assets/vector/defensive_player.svg
     - assets/vector/dummy.svg
     - assets/vector/hoop.svg
     - assets/vector/pole_on_ground.svg
