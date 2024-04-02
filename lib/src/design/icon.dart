@@ -33,6 +33,9 @@ class Icons {
   static const IconData defensivePlayer = IconData._('assets/vector/defensive_player.svg');
   static const IconData dummy = IconData._('assets/vector/dummy.svg');
   static const IconData hoop = IconData._('assets/vector/hoop.svg');
+  static const IconData pileOfBalls = IconData._('assets/vector/pile_of_balls.svg');
+  static const IconData ballBackground = IconData._('assets/vector/ball_background.svg');
+  static const IconData ballForeground = IconData._('assets/vector/ball_foreground.svg');
   static const IconData poleOnGround = IconData._('assets/vector/pole_on_ground.svg');
   static const IconData poleStandingBackground = IconData._('assets/vector/pole_standing_background.svg');
   static const IconData poleStandingForeground = IconData._('assets/vector/pole_standing_foreground.svg');

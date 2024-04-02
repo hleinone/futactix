@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 import 'package:futactix/src/design.dart';
@@ -128,19 +127,38 @@ class _MainPageState extends State<MainPage> {
                   ToolbarGroup(
                     title: l10n.toolbarPileOfBalls,
                     child: const ToolbarItem(
-                      child: Icon(
-                        Icons.offensivePlayer,
-                        color: Colors.blue,
-                      ),
+                      child: Icon(Icons.pileOfBalls),
                     ),
                   ),
                   ToolbarGroup(
                     title: l10n.toolbarBall,
-                    child: const ToolbarItem(
-                      child: Icon(
-                        Icons.offensivePlayer,
-                        color: Colors.blue,
-                      ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        const ToolbarItem(
+                          child: Stack(
+                            children: [
+                              Icon(
+                                Icons.ballBackground,
+                                color: Colors.lightGrey,
+                              ),
+                              Icon(Icons.ballForeground),
+                            ],
+                          ),
+                        ),
+                        const ToolbarItem(
+                          child: Stack(
+                            children: [
+                              Icon(
+                                Icons.ballBackground,
+                                color: Colors.yellow,
+                              ),
+                              Icon(Icons.ballForeground),
+                            ],
+                          ),
+                        ),
+                      ].intersperse(const SizedBox(width: 4)).toList(),
                     ),
                   ),
                   ToolbarGroup(

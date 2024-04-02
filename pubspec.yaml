@@ -70,6 +70,9 @@ flutter:
     - assets/vector/defensive_player.svg
     - assets/vector/dummy.svg
     - assets/vector/hoop.svg
+    - assets/vector/pile_of_balls.svg
+    - assets/vector/ball_background.svg
+    - assets/vector/ball_foreground.svg
     - assets/vector/pole_on_ground.svg
     - assets/vector/pole_standing_background.svg
     - assets/vector/pole_standing_foreground.svg
