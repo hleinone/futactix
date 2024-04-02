@@ -46,7 +46,9 @@ class _MainPageState extends State<MainPage> {
                       final localDetails =
                           DragTargetDetails(data: details.data, offset: details.offset - dragTargetOffset);
                       setState(() {
-                        final key = ValueKey(details);
+                        final key = ValueKey(localDetails);
+                        final focusNode = FocusNode();
+                        focusNode.requestFocus();
                         objects = objects +
                             [
                               FutureBuilder(
@@ -64,18 +66,30 @@ class _MainPageState extends State<MainPage> {
                                   return Positioned(
                                     left: localDetails.offset.dx,
                                     top: localDetails.offset.dy,
-                                    child: MouseRegion(
-                                      cursor: SystemMouseCursors.click,
-                                      child: Draggable(
-                                        onDragCompleted: () {
+                                    child: KeyboardListener(
+                                      focusNode: focusNode,
+                                      onKeyEvent: (value) {
+                                        if (value.logicalKey == LogicalKeyboardKey.backspace ||
+                                            value.logicalKey == LogicalKeyboardKey.delete) {
                                           setState(() {
                                             objects.removeWhere((element) => element.key == key);
                                           });
-                                        },
-                                        feedback: child,
-                                        childWhenDragging: const SizedBox.shrink(),
-                                        data: details.data,
-                                        child: child,
+                                          FocusScope.of(context).unfocus();
+                                        }
+                                      },
+                                      child: MouseRegion(
+                                        cursor: SystemMouseCursors.click,
+                                        child: Draggable(
+                                          onDragCompleted: () {
+                                            setState(() {
+                                              objects.removeWhere((element) => element.key == key);
+                                            });
+                                          },
+                                          feedback: child,
+                                          childWhenDragging: const SizedBox.shrink(),
+                                          data: details.data,
+                                          child: child,
+                                        ),
                                       ),
                                     ),
                                   );
