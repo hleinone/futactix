@@ -330,16 +330,19 @@ class _MainPageState extends State<MainPage> {
                                   return Positioned(
                                     left: localDetails.offset.dx,
                                     top: localDetails.offset.dy,
-                                    child: Draggable(
-                                      onDragCompleted: () {
-                                        setState(() {
-                                          objects.removeWhere((element) => element.key == key);
-                                        });
-                                      },
-                                      feedback: child,
-                                      childWhenDragging: const SizedBox.shrink(),
-                                      data: details.data,
-                                      child: child,
+                                    child: MouseRegion(
+                                      cursor: SystemMouseCursors.click,
+                                      child: Draggable(
+                                        onDragCompleted: () {
+                                          setState(() {
+                                            objects.removeWhere((element) => element.key == key);
+                                          });
+                                        },
+                                        feedback: child,
+                                        childWhenDragging: const SizedBox.shrink(),
+                                        data: details.data,
+                                        child: child,
+                                      ),
                                     ),
                                   );
                                 },
