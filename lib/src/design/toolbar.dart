@@ -103,7 +103,7 @@ class ToolbarItem extends StatelessWidget {
 
   Future<Uint8List> captureWidget(GlobalKey key) async {
     final boundary = key.currentContext!.findRenderObject() as RenderRepaintBoundary;
-    final image = await boundary.toImage();
+    final image = await boundary.toImage(pixelRatio: 4);
     final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
     return byteData!.buffer.asUint8List();
   }

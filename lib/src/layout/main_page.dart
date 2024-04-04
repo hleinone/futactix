@@ -61,7 +61,7 @@ class _MainPageState extends State<MainPage> {
                                   }
                                   final child = Transform.rotate(
                                     angle: localDetails.data.angle,
-                                    child: Image.memory(data),
+                                    child: Image.memory(data, scale: 4),
                                   );
                                   return Positioned(
                                     left: localDetails.offset.dx,
