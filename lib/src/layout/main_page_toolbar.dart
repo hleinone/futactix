@@ -18,29 +18,29 @@ class MainPageToolbar extends StatelessWidget {
             children: <Widget>[
               const ToolbarItem(
                 direction: Direction.forward,
-                child: Icon(
-                  Icons.offensivePlayer,
+                child: ToolbarIcon(
+                  ToolbarIcons.offensivePlayer,
                   color: Colors.blue,
                 ),
               ),
               const ToolbarItem(
                 direction: Direction.forward,
-                child: Icon(
-                  Icons.offensivePlayer,
+                child: ToolbarIcon(
+                  ToolbarIcons.offensivePlayer,
                   color: Colors.red,
                 ),
               ),
               const ToolbarItem(
                 direction: Direction.forward,
-                child: Icon(
-                  Icons.offensivePlayer,
+                child: ToolbarIcon(
+                  ToolbarIcons.offensivePlayer,
                   color: Colors.yellow,
                 ),
               ),
               const ToolbarItem(
                 direction: Direction.forward,
-                child: Icon(
-                  Icons.offensivePlayer,
+                child: ToolbarIcon(
+                  ToolbarIcons.offensivePlayer,
                   color: Colors.grey,
                 ),
               ),
@@ -55,29 +55,29 @@ class MainPageToolbar extends StatelessWidget {
             children: <Widget>[
               const ToolbarItem(
                 direction: Direction.backward,
-                child: Icon(
-                  Icons.defensivePlayer,
+                child: ToolbarIcon(
+                  ToolbarIcons.defensivePlayer,
                   color: Colors.blue,
                 ),
               ),
               const ToolbarItem(
                 direction: Direction.backward,
-                child: Icon(
-                  Icons.defensivePlayer,
+                child: ToolbarIcon(
+                  ToolbarIcons.defensivePlayer,
                   color: Colors.red,
                 ),
               ),
               const ToolbarItem(
                 direction: Direction.backward,
-                child: Icon(
-                  Icons.defensivePlayer,
+                child: ToolbarIcon(
+                  ToolbarIcons.defensivePlayer,
                   color: Colors.yellow,
                 ),
               ),
               const ToolbarItem(
                 direction: Direction.backward,
-                child: Icon(
-                  Icons.defensivePlayer,
+                child: ToolbarIcon(
+                  ToolbarIcons.defensivePlayer,
                   color: Colors.grey,
                 ),
               ),
@@ -88,14 +88,14 @@ class MainPageToolbar extends StatelessWidget {
           title: l10n.toolbarDummy,
           child: const ToolbarItem(
             direction: Direction.forward,
-            child: Icon(Icons.dummy),
+            child: ToolbarIcon(ToolbarIcons.dummy),
           ),
         ),
         ToolbarGroup(
           title: l10n.toolbarHoop,
           child: const ToolbarItem(
-            child: Icon(
-              Icons.hoop,
+            child: ToolbarIcon(
+              ToolbarIcons.hoop,
               color: Colors.yellow,
             ),
           ),
@@ -103,7 +103,7 @@ class MainPageToolbar extends StatelessWidget {
         ToolbarGroup(
           title: l10n.toolbarPileOfBalls,
           child: const ToolbarItem(
-            child: Icon(Icons.pileOfBalls),
+            child: ToolbarIcon(ToolbarIcons.pileOfBalls),
           ),
         ),
         ToolbarGroup(
@@ -113,25 +113,15 @@ class MainPageToolbar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const ToolbarItem(
-                child: Stack(
-                  children: [
-                    Icon(
-                      Icons.ballBackground,
-                      color: Colors.lightGrey,
-                    ),
-                    Icon(Icons.ballForeground),
-                  ],
+                child: ToolbarIcon(
+                  ToolbarIcons.ball,
+                  color: Colors.lightGrey,
                 ),
               ),
               const ToolbarItem(
-                child: Stack(
-                  children: [
-                    Icon(
-                      Icons.ballBackground,
-                      color: Colors.yellow,
-                    ),
-                    Icon(Icons.ballForeground),
-                  ],
+                child: ToolbarIcon(
+                  ToolbarIcons.ball,
+                  color: Colors.yellow,
                 ),
               ),
             ].intersperse(const SizedBox(width: 4)).toList(),
@@ -140,8 +130,8 @@ class MainPageToolbar extends StatelessWidget {
         ToolbarGroup(
           title: l10n.toolbarPoleOnGround,
           child: const ToolbarItem(
-            child: Icon(
-              Icons.poleOnGround,
+            child: ToolbarIcon(
+              ToolbarIcons.poleOnGround,
               color: Colors.brown,
             ),
           ),
@@ -155,28 +145,18 @@ class MainPageToolbar extends StatelessWidget {
               const ToolbarItem(
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 4),
-                  child: Stack(
-                    children: [
-                      Icon(
-                        Icons.poleStandingBackground,
-                        color: Colors.brightRed,
-                      ),
-                      Icon(Icons.poleStandingForeground),
-                    ],
+                  child: ToolbarIcon(
+                    ToolbarIcons.poleStanding,
+                    color: Colors.brightRed,
                   ),
                 ),
               ),
               const ToolbarItem(
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 4),
-                  child: Stack(
-                    children: [
-                      Icon(
-                        Icons.poleStandingBackground,
-                        color: Colors.orange,
-                      ),
-                      Icon(Icons.poleStandingForeground),
-                    ],
+                  child: ToolbarIcon(
+                    ToolbarIcons.poleStanding,
+                    color: Colors.orange,
                   ),
                 ),
               ),
@@ -190,20 +170,20 @@ class MainPageToolbar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const ToolbarItem(
-                child: Icon(
-                  Icons.marker,
+                child: ToolbarIcon(
+                  ToolbarIcons.marker,
                   color: Colors.yellow,
                 ),
               ),
               const ToolbarItem(
-                child: Icon(
-                  Icons.marker,
+                child: ToolbarIcon(
+                  ToolbarIcons.marker,
                   color: Colors.brightRed,
                 ),
               ),
               const ToolbarItem(
-                child: Icon(
-                  Icons.marker,
+                child: ToolbarIcon(
+                  ToolbarIcons.marker,
                   color: Colors.blue,
                 ),
               ),
@@ -217,36 +197,21 @@ class MainPageToolbar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const ToolbarItem(
-                child: Stack(
-                  children: [
-                    Icon(
-                      Icons.coneBackground,
-                      color: Colors.yellow,
-                    ),
-                    Icon(Icons.coneForeground),
-                  ],
+                child: ToolbarIcon(
+                  ToolbarIcons.cone,
+                  color: Colors.yellow,
                 ),
               ),
               const ToolbarItem(
-                child: Stack(
-                  children: [
-                    Icon(
-                      Icons.coneBackground,
-                      color: Colors.brightRed,
-                    ),
-                    Icon(Icons.coneForeground),
-                  ],
+                child: ToolbarIcon(
+                  ToolbarIcons.cone,
+                  color: Colors.brightRed,
                 ),
               ),
               const ToolbarItem(
-                child: Stack(
-                  children: [
-                    Icon(
-                      Icons.coneBackground,
-                      color: Colors.blue,
-                    ),
-                    Icon(Icons.coneForeground),
-                  ],
+                child: ToolbarIcon(
+                  ToolbarIcons.cone,
+                  color: Colors.blue,
                 ),
               ),
             ].intersperse(const SizedBox(width: 4)).toList(),
@@ -255,14 +220,14 @@ class MainPageToolbar extends StatelessWidget {
         ToolbarGroup(
           title: l10n.toolbarFence,
           child: const ToolbarItem(
-            child: Icon(Icons.fence),
+            child: ToolbarIcon(ToolbarIcons.fence),
           ),
         ),
         ToolbarGroup(
           title: l10n.toolbarBench,
           child: const ToolbarItem(
-            child: Icon(
-              Icons.bench,
+            child: ToolbarIcon(
+              ToolbarIcons.bench,
               color: Colors.brown,
             ),
           ),
@@ -270,25 +235,25 @@ class MainPageToolbar extends StatelessWidget {
         ToolbarGroup(
           title: l10n.toolbarLadder,
           child: const ToolbarItem(
-            child: Icon(Icons.ladder),
+            child: ToolbarIcon(ToolbarIcons.ladder),
           ),
         ),
         ToolbarGroup(
           title: l10n.toolbarSmallGoal,
           child: const ToolbarItem(
-            child: Icon(Icons.smallGoal),
+            child: ToolbarIcon(ToolbarIcons.smallGoal),
           ),
         ),
         ToolbarGroup(
           title: l10n.toolbarLargeGoal,
           child: const ToolbarItem(
-            child: Icon(Icons.largeGoal),
+            child: ToolbarIcon(ToolbarIcons.largeGoal),
           ),
         ),
         ToolbarGroup(
           title: l10n.toolbarFutsalGoal,
           child: const ToolbarItem(
-            child: Icon(Icons.futsalGoal),
+            child: ToolbarIcon(ToolbarIcons.futsalGoal),
           ),
         ),
       ],

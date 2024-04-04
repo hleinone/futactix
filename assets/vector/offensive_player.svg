@@ -1,4 +1,3 @@
 <svg width="36" height="20" viewBox="0 0 36 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle cx="18" cy="10" r="10" fill="black"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M34 18H36C36 8.05887 27.9411 0 18 0C8.05887 0 0 8.05887 0 18H2C2 9.16344 9.16344 2 18 2C26.8366 2 34 9.16344 34 18Z" fill="black"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M36 18H34C34 12.1523 30.8629 7.03726 26.1798 4.2461C27.3265 5.87331 28 7.85801 28 10C28 15.5228 23.5228 20 18 20C12.4772 20 8 15.5228 8 10C8 7.85801 8.67346 5.87331 9.82019 4.2461C5.13711 7.03726 2 12.1523 2 18H0C0 8.05887 8.05887 0 18 0C27.9411 0 36 8.05887 36 18Z" fill="black"/>
 </svg>
