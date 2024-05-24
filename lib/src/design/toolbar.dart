@@ -110,12 +110,12 @@ class ToolbarItem extends StatelessWidget {
 }
 
 enum Direction {
-  forward(angle: 0),
-  backward(angle: math.pi);
+  forward._(angle: 0),
+  backward._(angle: math.pi);
 
   final double angle;
 
-  const Direction({required this.angle});
+  const Direction._({required this.angle});
 }
 
 extension on Axis {
