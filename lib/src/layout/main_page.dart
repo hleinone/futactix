@@ -101,17 +101,9 @@ class _MainPageState extends State<MainPage> {
                       });
                     },
                     builder: (context, candidateData, rejectedData) {
-                      return ColoredBox(
-                        color: pitch.color,
-                        child: Stack(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(24),
-                              child: Icon(pitch.image),
-                            ),
-                            ...objects,
-                          ],
-                        ),
+                      return PitchView(
+                        pitch: pitch,
+                        objects: objects,
                       );
                     },
                   ),
@@ -171,13 +163,52 @@ class MainPageData extends InheritedWidget {
 }
 
 enum Pitch {
-  football11(axis: Axis.vertical, color: Colors.green, image: Icons.football11),
-  football11vs11(axis: Axis.horizontal, color: Colors.green, image: Icons.football11vs11),
-  futsal5vs5(axis: Axis.horizontal, color: Colors.parquet, image: Icons.futsal5vs5);
+  football11._(axis: Axis.vertical, color: Colors.green, image: Icons.football11, size: Size(875, 658)),
+  football11vs11._(axis: Axis.horizontal, color: Colors.green, image: Icons.football11vs11, size: Size(658, 438)),
+  futsal5vs5._(axis: Axis.horizontal, color: Colors.parquet, image: Icons.futsal5vs5, size: Size(610, 299));
 
   final Axis axis;
   final Color color;
   final IconData image;
+  final Size size;
 
-  const Pitch({required this.axis, required this.color, required this.image});
+  const Pitch._({required this.axis, required this.color, required this.image, required this.size});
+}
+
+class PitchView extends StatelessWidget {
+  final Pitch pitch;
+  final List<Widget> objects;
+
+  const PitchView({
+    super.key,
+    required this.pitch,
+    required this.objects,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxWidth: pitch.size.width,
+        maxHeight: pitch.size.height,
+      ),
+      child: AspectRatio(
+        aspectRatio: pitch.size.aspectRatio,
+        child: LayoutBuilder(builder: (context, constraints) {
+          final scale = constraints.biggest.longestSide / pitch.size.longestSide;
+          return ColoredBox(
+            color: pitch.color,
+            child: Stack(
+              children: [
+                Icon(pitch.image),
+                ...objects,
+              ],
+            ),
+          );
+        }),
+      ),
+    );
+  }
+}
+
 }
