@@ -181,14 +181,14 @@ class ToolbarIcon extends StatelessWidget {
       alignment: Alignment.center,
       children: [
         SvgPicture.asset(
+          strokePath,
+          colorFilter: strokeColorFilter ?? strokeColor?.let((c) => ColorFilter.mode(c, BlendMode.srcIn)),
+        ),
+        SvgPicture.asset(
           backgroundPath,
           colorFilter: colorFilter ?? color?.let((c) => ColorFilter.mode(c, BlendMode.srcIn)),
         ),
         SvgPicture.asset(foregroundPath),
-        SvgPicture.asset(
-          strokePath,
-          colorFilter: strokeColorFilter ?? strokeColor?.let((c) => ColorFilter.mode(c, BlendMode.srcIn)),
-        ),
       ],
     );
   }
