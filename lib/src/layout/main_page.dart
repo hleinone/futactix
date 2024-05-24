@@ -43,59 +43,61 @@ class _MainPageState extends State<MainPage> {
                     onAcceptWithDetails: (details) {
                       final dragTargetOffset =
                           (dragTargetKey.currentContext!.findRenderObject() as RenderBox).localToGlobal(Offset.zero);
-                      final localDetails =
-                          DragTargetDetails(data: details.data, offset: details.offset - dragTargetOffset);
+                      final localDetails = DragTargetDetails(
+                        data: details.data,
+                        offset: details.offset - dragTargetOffset,
+                      );
                       setState(() {
                         final key = ValueKey(localDetails);
                         final focusNode = FocusNode();
                         focusNode.requestFocus();
-                        objects = objects +
-                            [
-                              FutureBuilder(
-                                key: key,
-                                future: localDetails.data.image,
-                                builder: (context, snapshot) {
-                                  final data = snapshot.data;
-                                  if (data == null) {
-                                    return const SizedBox.shrink();
-                                  }
-                                  final child = Transform.rotate(
-                                    angle: localDetails.data.angle,
-                                    child: Image.memory(data, scale: 4),
-                                  );
-                                  return Positioned(
-                                    left: localDetails.offset.dx,
-                                    top: localDetails.offset.dy,
-                                    child: KeyboardListener(
-                                      focusNode: focusNode,
-                                      onKeyEvent: (value) {
-                                        if (value.logicalKey == LogicalKeyboardKey.backspace ||
-                                            value.logicalKey == LogicalKeyboardKey.delete) {
-                                          setState(() {
-                                            objects.removeWhere((element) => element.key == key);
-                                          });
-                                          FocusScope.of(context).unfocus();
-                                        }
+                        objects = [
+                          ...objects,
+                          FutureBuilder(
+                            key: key,
+                            future: localDetails.data.image,
+                            builder: (context, snapshot) {
+                              final data = snapshot.data;
+                              if (data == null) {
+                                return const SizedBox.shrink();
+                              }
+                              final child = Transform.rotate(
+                                angle: localDetails.data.angle,
+                                child: Image.memory(data, scale: 4),
+                              );
+                              return Positioned(
+                                left: localDetails.offset.dx,
+                                top: localDetails.offset.dy,
+                                child: KeyboardListener(
+                                  focusNode: focusNode,
+                                  onKeyEvent: (value) {
+                                    if (value.logicalKey == LogicalKeyboardKey.backspace ||
+                                        value.logicalKey == LogicalKeyboardKey.delete) {
+                                      setState(() {
+                                        objects.removeWhere((element) => element.key == key);
+                                      });
+                                      FocusScope.of(context).unfocus();
+                                    }
+                                  },
+                                  child: MouseRegion(
+                                    cursor: SystemMouseCursors.click,
+                                    child: Draggable(
+                                      onDragCompleted: () {
+                                        setState(() {
+                                          objects.removeWhere((element) => element.key == key);
+                                        });
                                       },
-                                      child: MouseRegion(
-                                        cursor: SystemMouseCursors.click,
-                                        child: Draggable(
-                                          onDragCompleted: () {
-                                            setState(() {
-                                              objects.removeWhere((element) => element.key == key);
-                                            });
-                                          },
-                                          feedback: child,
-                                          childWhenDragging: const SizedBox.shrink(),
-                                          data: details.data,
-                                          child: child,
-                                        ),
-                                      ),
+                                      feedback: child,
+                                      childWhenDragging: const SizedBox.shrink(),
+                                      data: details.data,
+                                      child: child,
                                     ),
-                                  );
-                                },
-                              )
-                            ];
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ];
                       });
                     },
                     builder: (context, candidateData, rejectedData) {
