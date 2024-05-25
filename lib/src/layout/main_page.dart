@@ -21,6 +21,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   late final l10n = L10n.of(context);
   PitchType type = PitchType.football11vs11;
+  final clearNotifier = ValueNotifier<int>(0);
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,6 @@ class _MainPageState extends State<MainPage> {
           child: Column(
             children: [
               const MainPageToolbar(),
-              Expanded(child: Center(child: Pitch(type: type))),
               Expanded(
                 child: GestureDetector(
                   onTap: () {
@@ -43,6 +43,7 @@ class _MainPageState extends State<MainPage> {
                     child: Center(
                       child: Pitch(
                         type: type,
+                        clearNotifier: clearNotifier,
                       ),
                     ),
                   ),
@@ -74,10 +75,10 @@ class _MainPageState extends State<MainPage> {
         setState(() {
           type = PitchType.futsal5vs5;
         });
+        break;
       case MenuItem.removeObjects:
-        setState(() {
-          //objects = [];
-        });
+        clearNotifier.value++;
+        break;
       default:
         // TODO: Implement other menu items
         break;

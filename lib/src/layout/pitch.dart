@@ -19,10 +19,12 @@ enum PitchType {
 
 class Pitch extends StatefulWidget {
   final PitchType type;
+  final ChangeNotifier clearNotifier;
 
   const Pitch({
     super.key,
     required this.type,
+    required this.clearNotifier,
   });
 
   @override
@@ -32,6 +34,18 @@ class Pitch extends StatefulWidget {
 class _PitchState extends State<Pitch> {
   List<PitchObject> objects = [];
   final dragTargetKey = GlobalKey();
+
+  @override
+  void initState() {
+    super.initState();
+    widget.clearNotifier.addListener(() => setState(objects.clear));
+  }
+
+  @override
+  void dispose() {
+    widget.clearNotifier.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
