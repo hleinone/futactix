@@ -115,7 +115,7 @@ class MainPageToolbar extends StatelessWidget {
               const ToolbarItem(
                 child: ToolbarIcon(
                   ToolbarIcons.ball,
-                  color: Colors.lightGrey,
+                  color: Colors.white,
                 ),
               ),
               const ToolbarItem(
