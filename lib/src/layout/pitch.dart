@@ -126,7 +126,7 @@ class PitchObject extends StatelessWidget {
           return const SizedBox.shrink();
         }
         final child = Transform.scale(
-          alignment: Alignment.topCenter,
+          alignment: Alignment.topLeft,
           scale: scale,
           child: Transform.rotate(
             angle: object.angle,
