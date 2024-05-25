@@ -61,7 +61,7 @@ class ToolbarGroup extends StatelessWidget {
   }
 }
 
-class ToolbarItem extends StatelessWidget {
+class ToolbarItem extends StatefulWidget {
   final Direction? direction;
   final Widget child;
 
@@ -72,8 +72,15 @@ class ToolbarItem extends StatelessWidget {
   });
 
   @override
+  State<ToolbarItem> createState() => _ToolbarItemState();
+}
+
+class _ToolbarItemState extends State<ToolbarItem> {
+  Map<GlobalKey, Uint8List> imageCache = {};
+
+  @override
   Widget build(BuildContext context) {
-    final angle = direction?.let((direction) {
+    final angle = widget.direction?.let((direction) {
       final axis = MainPage.of(context).pitch.axis;
       return direction.angle - axis.angle;
     });
@@ -82,7 +89,7 @@ class ToolbarItem extends StatelessWidget {
       height: 40,
       child: Center(
         widthFactor: 1,
-        child: this.child,
+        child: widget.child,
       ),
     );
     final key = GlobalKey();
@@ -102,10 +109,15 @@ class ToolbarItem extends StatelessWidget {
   }
 
   Future<Uint8List> captureWidget(GlobalKey key) async {
+    if (imageCache.containsKey(key)) {
+      return imageCache[key]!;
+    }
     final boundary = key.currentContext!.findRenderObject() as RenderRepaintBoundary;
     final image = await boundary.toImage(pixelRatio: 4);
     final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-    return byteData!.buffer.asUint8List();
+    final data = byteData!.buffer.asUint8List();
+    imageCache[key] = data;
+    return data;
   }
 }
 
