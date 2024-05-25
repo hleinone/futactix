@@ -33,6 +33,21 @@ class _MainPageState extends State<MainPage> {
             children: [
               const MainPageToolbar(),
               Expanded(child: Center(child: Pitch(type: type))),
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    FocusManager.instance.primaryFocus?.unfocus();
+                  },
+                  child: ColoredBox(
+                    color: Colors.transparent,
+                    child: Center(
+                      child: Pitch(
+                        type: type,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/services.dart';
 import 'package:futactix/src/design.dart';
 import 'package:futactix/src/util.dart';
@@ -53,27 +55,37 @@ class _PitchState extends State<Pitch> {
               final offset = (details.offset - dragTargetKey.globalOffset!) / scale;
               setState(() {
                 final key = ValueKey((object, offset));
-                final focusNode = FocusNode();
+                final focusNode = FocusNode(skipTraversal: true);
                 focusNode.requestFocus();
                 objects = [
                   ...objects,
                   PitchObject(
                     key: key,
-                    object: details.data,
+                    object: object,
                     offset: offset,
+                    angle: object.angle,
                     scale: scale,
                     focusNode: focusNode,
                     onRemove: (key) {
                       setState(() {
-                        debugPrint('remove element');
                         objects.removeWhere((element) => element.key == key);
                       });
                       FocusScope.of(context).unfocus();
                     },
-                    onDragComplete: (key) {
+                    onDragComplete: (key, angle) {
                       setState(() {
-                        debugPrint('drag remove element');
                         objects.removeWhere((element) => element.key == key);
+                      });
+                    },
+                    onRotate: (key, rotation) {
+                      setState(() {
+                        objects = objects.map((element) {
+                          if (element.key == key) {
+                            final angle = element.angle + (rotation == Rotation.clockwise ? pi : -pi) / 16;
+                            return element.copyWith(angle: angle);
+                          }
+                          return element;
+                        }).toList();
                       });
                     },
                   )
@@ -101,18 +113,22 @@ class _PitchState extends State<Pitch> {
 class PitchObject extends StatelessWidget {
   final ToolbarObject object;
   final Offset offset;
+  final double angle;
   final double scale;
   final void Function(Key key) onRemove;
-  final void Function(Key key) onDragComplete;
+  final void Function(Key key, double angle) onDragComplete;
+  final void Function(Key key, Rotation rotation) onRotate;
   final FocusNode focusNode;
 
   const PitchObject({
     super.key,
     required this.object,
     required this.offset,
+    required this.angle,
     required this.scale,
     required this.onRemove,
     required this.onDragComplete,
+    required this.onRotate,
     required this.focusNode,
   });
 
@@ -129,8 +145,17 @@ class PitchObject extends StatelessWidget {
           alignment: Alignment.topLeft,
           scale: scale,
           child: Transform.rotate(
-            angle: object.angle,
-            child: Image.memory(data, scale: 4),
+            angle: angle,
+            child: ListenableBuilder(
+              listenable: focusNode,
+              builder: (context, child) {
+                if (focusNode.hasFocus) {
+                  return child!;
+                }
+                return child!;
+              },
+              child: Image.memory(data, scale: 4),
+            ),
           ),
         );
         return Positioned(
@@ -140,22 +165,32 @@ class PitchObject extends StatelessWidget {
             cursor: SystemMouseCursors.click,
             child: GestureDetector(
               onTap: () {
-                debugPrint('tap');
                 focusNode.requestFocus();
               },
               child: Draggable(
+                onDragStarted: () {
+                  FocusManager.instance.primaryFocus?.unfocus();
+                },
                 onDragCompleted: () {
-                  onDragComplete(key!);
+                  onDragComplete(key!, angle);
                 },
                 feedback: child,
                 childWhenDragging: const SizedBox.shrink(),
-                data: object,
+                data: object.copyWith(angle: angle),
                 child: KeyboardListener(
                   focusNode: focusNode,
                   onKeyEvent: (value) {
-                    if (value.logicalKey == LogicalKeyboardKey.backspace ||
-                        value.logicalKey == LogicalKeyboardKey.delete) {
-                      onRemove(key!);
+                    switch (value.logicalKey) {
+                      case LogicalKeyboardKey.backspace:
+                      case LogicalKeyboardKey.delete:
+                        onRemove(key!);
+                        break;
+                      case LogicalKeyboardKey.arrowRight:
+                        onRotate(key!, Rotation.clockwise);
+                        break;
+                      case LogicalKeyboardKey.arrowLeft:
+                        onRotate(key!, Rotation.counterclockwise);
+                        break;
                     }
                   },
                   child: child,
@@ -168,14 +203,16 @@ class PitchObject extends StatelessWidget {
     );
   }
 
-  PitchObject copyWith({double scale = 1}) {
+  PitchObject copyWith({double? angle, double? scale}) {
     return PitchObject(
       key: key,
       object: object,
       offset: offset,
-      scale: scale,
+      angle: angle ?? this.angle,
+      scale: scale ?? this.scale,
       onRemove: onRemove,
       onDragComplete: onDragComplete,
+      onRotate: onRotate,
       focusNode: focusNode,
     );
   }
@@ -186,3 +223,5 @@ extension on GlobalKey {
     return currentContext?.findRenderObject()?.maybeAs<RenderBox>()?.localToGlobal(Offset.zero);
   }
 }
+
+enum Rotation { clockwise, counterclockwise }

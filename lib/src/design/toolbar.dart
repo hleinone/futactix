@@ -141,6 +141,14 @@ class ToolbarObject {
   Future<Uint8List> get image => imageResolver(imageKey);
 
   const ToolbarObject({required this.imageKey, required this.imageResolver, required this.angle});
+
+  ToolbarObject copyWith({double? angle}) {
+    return ToolbarObject(
+      imageKey: imageKey,
+      imageResolver: imageResolver,
+      angle: angle ?? this.angle,
+    );
+  }
 }
 
 class ToolbarIcon extends StatelessWidget {
